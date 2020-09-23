@@ -13,7 +13,7 @@
 - База данных postgresql используемая,  как кэш
 - Шина данных на базе Apache Kafka
 - Очередь для Logstash на базе Redis
-- Elastic stack для реализации логирования продуктивного веб приложения - три ноды elasticsearch, два logstash  и две ноды kibana 
+- Elastic stack для реализации логирования продуктивного веб приложения - три ноды elasticsearch, два logstash и две ноды kibana 
 - Мониторинг стэк на базе prometheus и grafana 
 - Mongodb, как основное хранилище данных для java приложения 
 - Jenkins сервер 
