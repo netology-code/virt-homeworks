@@ -20,9 +20,9 @@
 
 ## Модуль 6. Администрирование баз данных
 
-6.1. [] Типы и структура СУБД
+6.1. [Типы и структура СУБД](https://github.com/netology-code/virt-homeworks/tree/master/06-db-01-basics)
 
-6.2. [] Запросы, индексы и эксплейны
+6.2. [SQL](https://github.com/netology-code/virt-homeworks/tree/master/06-db-02-sql)
 
 6.3. [] MySQL
 
@@ -30,7 +30,7 @@
 
 6.5. [] Elasticsearch
 
-6.6. [] Мониторинг, метрики и траблшутинг
+6.6. [] Troubleshooting
 
 
 ## Модуль 7. Облачная инфраструктура. Terraform
