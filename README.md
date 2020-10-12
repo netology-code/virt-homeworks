@@ -46,3 +46,7 @@
 7.5. [] Введение в Golang
 
 7.6. [] Написание собственных провайдеров для Terraform
+
+## Дополнительные материалы
+
+1. [Модуль 6. Администрирование баз данных](https://github.com/netology-code/virt-homeworks/tree/master/additional)
