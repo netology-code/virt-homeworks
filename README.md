@@ -28,7 +28,7 @@
 
 6.4. [PostgreSQL](https://github.com/netology-code/virt-homeworks/tree/master/06-db-04-postgresql)
 
-6.5. [] Elasticsearch
+6.5. [Elasticsearch](https://github.com/netology-code/virt-homeworks/tree/master/06-db-05-elastcisearch)
 
 6.6. [] Troubleshooting
 
