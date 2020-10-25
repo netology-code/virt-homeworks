@@ -30,7 +30,7 @@
 
 6.5. [Elasticsearch](https://github.com/netology-code/virt-homeworks/tree/master/06-db-05-elasticsearch)
 
-6.6. [] Troubleshooting
+6.6. [Troubleshooting](https://github.com/netology-code/virt-homeworks/tree/master/06-db-06-troobleshooting)
 
 
 ## Модуль 7. Облачная инфраструктура. Terraform
