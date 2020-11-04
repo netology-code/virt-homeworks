@@ -1,0 +1,11 @@
+plugins {
+    id 'application'
+}
+apply plugin: 'application'
+mainClassName = 'course.CourseInfo'
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'course.CourseInfo'
+    }
+}
