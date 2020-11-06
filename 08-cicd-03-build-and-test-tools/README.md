@@ -8,7 +8,7 @@ https://hub.docker.com/r/sonatype/nexus3
 
 docker run -d -p 8081:8081 --name nexus sonatype/nexus3
 
-docker logs container_id - проверить что сервис запущен
+docker logs container_id - проверить, что сервис запущен
 
 docker exec container_id  cat /nexus-data/admin.password
 
