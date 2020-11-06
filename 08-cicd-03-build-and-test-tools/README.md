@@ -5,8 +5,8 @@
 Установите nexus любым удобным методом, например с помощью docker:
 https://hub.docker.com/r/sonatype/nexus3
 docker run -d -p 8081:8081 --name nexus sonatype/nexus3
-docker logs 49aa37ba2ac0 - проверить что сервис запущен
-docker exec 49aa37ba2ac0  cat /nexus-data/admin.password
+docker logs container_id - проверить что сервис запущен
+docker exec container_id  cat /nexus-data/admin.password
 Пользователь admin
 создайте 3 репозитория - для jar файлов, Docker images и текстовых документов, установите срок жизни jar файлов на 76 дней, Docker images на 5 дней и текстовых документов на 18 дней. Загрузите по 3 соответствующих объекта данных в каждый репозиторий соответственно. Предоставьте результат в виде экспорта конфигурации nexus и скриншотов
 
