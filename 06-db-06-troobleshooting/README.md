@@ -1,3 +1,5 @@
+# Домашнее задание к занятию "6.6. Troubleshooting"
+
 ## Задача 1
 
 Перед выполнением задания ознакомьтесь с документацией по [администрированию MongoDB](https://docs.mongodb.com/manual/administration/).
