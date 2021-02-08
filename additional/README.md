@@ -16,3 +16,11 @@
 1. [Все типы данных](https://dev.mysql.com/doc/refman/8.0/en/data-types.html)
 2. [Старая статья с обзором движков таблиц](https://habr.com/ru/post/64851/)
 3. [Ещё одно описание видов индексов](https://habr.com/ru/post/102785/)
+
+## PostgreSQL
+
+1. [Резервное копирование и восстановление](https://postgrespro.ru/docs/postgresql/9.6/backup)
+2. [Параметры autovacuum](https://postgrespro.ru/docs/postgresql/12/runtime-config-autovacuum)
+3. [Что такое DRBD и как настроить](https://habr.com/ru/company/otus/blog/509710/)
+4. [Секционирвание(Шардинг) таблиц](https://postgrespro.ru/docs/postgresql/10/ddl-partitioning)
+5. [Встроенный функционал горизонтального шардинга](https://postgrespro.ru/docs/enterprise/10/pg-shardman)
