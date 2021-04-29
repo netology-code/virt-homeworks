@@ -24,3 +24,6 @@
 3. [Что такое DRBD и как настроить](https://habr.com/ru/company/otus/blog/509710/)
 4. [Секционирвание(Шардинг) таблиц](https://postgrespro.ru/docs/postgresql/10/ddl-partitioning)
 5. [Встроенный функционал горизонтального шардинга](https://postgrespro.ru/docs/enterprise/10/pg-shardman)
+6. [Оператор ANALYZE](https://postgrespro.ru/docs/postgresql/9.6/sql-analyze)
+7. [Оператор EXPLAIN](https://postgrespro.ru/docs/postgresql/9.6/sql-explain)
+8. [Оператор VACUUM](https://postgrespro.ru/docs/postgresql/9.6/sql-vacuum)
