@@ -56,7 +56,7 @@ InterfaceError: (InterfaceError) 2013: Lost connection to MySQL server during qu
 
 ---
 
-### Как оформить ДЗ?
+### Как сдавать задание
 
 Выполненное домашнее задание пришлите ссылкой на .md-файл в вашем репозитории.
 
