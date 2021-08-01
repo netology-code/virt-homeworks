@@ -20,7 +20,7 @@
 
 ## Модуль 6. Администрирование баз данных
 
-6.1. [Типы и структура СУБД](https://github.com/netology-code/virt-homeworks/tree/master/06-db-01-basics)
+6.1. [Типы и структура СУБД](06-db-01-basics)
 
 6.2. [SQL](https://github.com/netology-code/virt-homeworks/tree/master/06-db-02-sql)
 
