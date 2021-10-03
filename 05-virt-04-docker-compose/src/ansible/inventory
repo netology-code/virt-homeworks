@@ -1,0 +1,5 @@
+[nodes:children]
+manager
+
+[manager]
+node01.netology.cloud ansible_host=
