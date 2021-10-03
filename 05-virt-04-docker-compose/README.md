@@ -15,7 +15,7 @@
 - Скриншот страницы свойств созданной ВМ, как на примере ниже:
 
 <p align="center">
-  <img width="800" height="600" src="./assets/yc_01.png">
+  <img width="1200" height="800" src="./assets/yc_01.png">
 </p>
 
 ## Задача 3
@@ -25,7 +25,7 @@
 Для получения зачета, вам необходимо предоставить:
 - Скриншот работаюшего веб-интерфейса Grafana с текущими метриками, как на примере ниже
 <p align="center">
-  <img width="800" height="600" src="./assets/yc_02.png">
+  <img width="1200" height="600" src="./assets/yc_02.png">
 </p>
 
 ## Задача 4 (*)
