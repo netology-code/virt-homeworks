@@ -10,13 +10,15 @@
 
 ## Модуль 5. Виртуализация
 
-5.1. [Основы виртуализации](https://github.com/netology-code/virt-homeworks/tree/master/05-virt-01-basics)
+5.1. [Введение в виртуализацию. Типы и функции гипервизоров. Обзор рынка вендоров и областей применения](https://github.com/netology-code/virt-homeworks/tree/virt-9/05-virt-01-basics)
 
-5.2. [Системы управления виртуализацией](https://github.com/netology-code/virt-homeworks/tree/master/05-virt-02-control-systems)
+5.2. [Применение принципов IaaC в работе с виртуальными машинамий](https://github.com/netology-code/virt-homeworks/tree/virt-9/05-virt-02-iaac)
 
-5.3. [Контейнеризация на примере Docker](https://github.com/netology-code/virt-homeworks/tree/master/05-virt-03-docker-usage)
+5.3. [Введение. Экосистема. Архитектура. Жизненный цикл Docker контейнера](https://github.com/netology-code/virt-homeworks/tree/virt-9/05-virt-03-docker)
 
-5.4. [Практические навыки работы с Docker](https://github.com/netology-code/virt-homeworks/tree/master/05-virt-04-docker-practical-skills)
+5.4. [Оркестрация группой Docker контейнеров на примере Docker Compose.](https://github.com/netology-code/virt-homeworks/tree/virt-9/05-virt-04-docker-compose)
+
+5.5. [ Оркестрация кластером Docker контейнеров на примере Docker Swarm.]()
 
 ## Модуль 6. Администрирование баз данных
 
