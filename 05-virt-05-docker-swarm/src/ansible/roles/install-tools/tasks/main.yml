@@ -1,0 +1,14 @@
+---
+  - name: Installing tools
+    yum: >
+      package={{ item }}
+      state=present
+      update_cache=yes
+    with_items:
+      - ntp
+      - python
+      - tcpdump
+      - wget
+      - openssl
+      - curl
+      - git

@@ -1,0 +1,41 @@
+---
+  - name: Install of Requrements Tools
+    hosts: nodes
+    become: yes
+    become_user: root
+    remote_user: centos
+    roles:
+      - install-tools
+      - configure-hosts-file
+
+  - name: Install Docker Engine
+    hosts: nodes
+    become: yes
+    become_user: root
+    remote_user: centos
+    roles:
+      - docker-installation
+
+  - name: Initialize Docker Swarm Cluster
+    hosts: active
+    become: yes
+    become_user: root
+    remote_user: centos
+    roles:
+      - docker-swarm-init
+
+  - name: Add Managers Swarm Cluster
+    hosts: standby
+    become: yes
+    become_user: root
+    remote_user: centos
+    roles:
+      - docker-swarm-add-manager
+
+  - name: Add Workers to the Swarm Cluster
+    hosts: workers
+    become: yes
+    become_user: root
+    remote_user: centos
+    roles:
+      - docker-swarm-add-worker

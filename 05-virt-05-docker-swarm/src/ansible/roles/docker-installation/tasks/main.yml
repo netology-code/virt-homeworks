@@ -1,0 +1,19 @@
+---
+  - name: Add docker repository
+    command: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+
+  - name: Installing docker package
+    yum: >
+      package={{ item }}
+      state=present
+      update_cache=yes
+    with_items:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+
+  - name: Enable docker daemon
+    systemd:
+      name: docker
+      state: started
+      enabled: yes
