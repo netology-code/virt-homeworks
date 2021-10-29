@@ -18,7 +18,7 @@
 
 5.4. [Оркестрация группой Docker контейнеров на примере Docker Compose.](https://github.com/netology-code/virt-homeworks/tree/virt-9/05-virt-04-docker-compose)
 
-5.5. [ Оркестрация кластером Docker контейнеров на примере Docker Swarm.]()
+5.5. [ Оркестрация кластером Docker контейнеров на примере Docker Swarm.](https://github.com/netology-code/virt-homeworks/tree/virt-9/05-virt-05-docker-swarm)
 
 ## Модуль 6. Администрирование баз данных
 
