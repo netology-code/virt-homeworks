@@ -10,15 +10,15 @@
 
 ## Модуль 5. Виртуализация
 
-5.1. [Введение в виртуализацию. Типы и функции гипервизоров. Обзор рынка вендоров и областей применения](https://github.com/netology-code/virt-homeworks/tree/virt-9/05-virt-01-basics)
+5.1. [Введение в виртуализацию. Типы и функции гипервизоров. Обзор рынка вендоров и областей применения](https://github.com/netology-code/virt-homeworks/tree/virt-11/05-virt-01-basics)
 
-5.2. [Применение принципов IaaC в работе с виртуальными машинами](https://github.com/netology-code/virt-homeworks/tree/virt-9/05-virt-02-iaac)
+5.2. [Применение принципов IaaC в работе с виртуальными машинами](https://github.com/netology-code/virt-homeworks/tree/virt-11/05-virt-02-iaac)
 
-5.3. [Введение. Экосистема. Архитектура. Жизненный цикл Docker контейнера](https://github.com/netology-code/virt-homeworks/tree/virt-9/05-virt-03-docker)
+5.3. [Введение. Экосистема. Архитектура. Жизненный цикл Docker контейнера](https://github.com/netology-code/virt-homeworks/tree/virt-11/05-virt-03-docker)
 
-5.4. [Оркестрация группой Docker контейнеров на примере Docker Compose.](https://github.com/netology-code/virt-homeworks/tree/virt-9/05-virt-04-docker-compose)
+5.4. [Оркестрация группой Docker контейнеров на примере Docker Compose.](https://github.com/netology-code/virt-homeworks/tree/virt-11/05-virt-04-docker-compose)
 
-5.5. [ Оркестрация кластером Docker контейнеров на примере Docker Swarm.](https://github.com/netology-code/virt-homeworks/tree/virt-9/05-virt-05-docker-swarm)
+5.5. [ Оркестрация кластером Docker контейнеров на примере Docker Swarm.](https://github.com/netology-code/virt-homeworks/tree/virt-11/05-virt-05-docker-swarm)
 
 ## Модуль 6. Администрирование баз данных
 
