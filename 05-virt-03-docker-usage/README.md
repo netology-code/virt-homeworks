@@ -38,7 +38,7 @@
 Hey, Netology
 </head>
 <body>
-<h1>I’m kinda DevOps now</h1>
+<h1>I'm kinda DevOps now</h1>
 </body>
 </html>
 ```
