@@ -18,7 +18,7 @@
 
       - name: Installing tools
         yum: >
-          package={{ item }}
+          name={{ item }}
           state=present
           update_cache=yes
         with_items:
@@ -30,7 +30,7 @@
 
       - name: Installing docker package
         yum: >
-          package={{ item }}
+          name={{ item }}
           state=present
           update_cache=yes
         with_items:
