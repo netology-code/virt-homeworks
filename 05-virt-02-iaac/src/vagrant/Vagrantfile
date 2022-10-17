@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 
 ISO = "bento/ubuntu-20.04"
-NET = "192.168.192."
+NET = "192.168.56."
 DOMAIN = ".netology"
 HOST_PREFIX = "server"
 INVENTORY_PATH = "../ansible/inventory"
