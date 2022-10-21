@@ -3,13 +3,13 @@
 ## Введение
 
 Перед выполнением задания вы можете ознакомиться с 
-[дополнительными материалами](https://github.com/netology-code/virt-homeworks/tree/master/additional/README.md).
+[дополнительными материалами](https://github.com/netology-code/virt-homeworks/tree/virt-11/additional).
 
 ## Задача 1
 
 Используя docker поднимите инстанс MySQL (версию 8). Данные БД сохраните в volume.
 
-Изучите [бэкап БД](https://github.com/netology-code/virt-homeworks/tree/master/06-db-03-mysql/test_data) и 
+Изучите [бэкап БД](https://github.com/netology-code/virt-homeworks/tree/virt-11/06-db-03-mysql/test_data) и 
 восстановитесь из него.
 
 Перейдите в управляющую консоль `mysql` внутри контейнера.
