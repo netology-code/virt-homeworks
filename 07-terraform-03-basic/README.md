@@ -33,6 +33,9 @@ dynamodb.
 ---
 
 #### Ответ
+Я создал S3 в YC и указал на хранение tfstate в хранилище
+![Bucket](fold/wrksp.png)
+
 1. Вывод команды `terraform workspace list`.
 ```bash
 root@bhdevops:/home/avdeevan/gitnew/bucket# terraform workspace list
