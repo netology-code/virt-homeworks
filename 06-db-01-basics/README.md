@@ -3,7 +3,7 @@
 ## Введение
 
 Перед выполнением задания вы можете ознакомиться с 
-[дополнительными материалами](https://github.com/netology-code/virt-homeworks/tree/master/additional/README.md).
+[дополнительными материалами](https://github.com/netology-code/virt-homeworks/tree/virt-11/additional).
 
 ## Задача 1
 
