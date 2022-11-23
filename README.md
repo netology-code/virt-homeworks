@@ -51,4 +51,4 @@
 
 ## Дополнительные материалы
 
-1. [Модуль 6. Администрирование баз данных](https://github.com/netology-code/virt-homeworks/tree/master/additional)
+1. [Блок 6. Администрирование баз данных](https://github.com/netology-code/virt-homeworks/blob/virt-11/additional/README.md)
