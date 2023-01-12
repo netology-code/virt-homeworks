@@ -1,0 +1,11 @@
+[psql]
+d00psql-walg0001
+
+[bkpstorage]
+d00psqlbkp0001
+
+
+[all:vars]
+ansible_user=ansible
+ansible_ssh_common_args=' -o StrictHostKeyChecking=no'
+ansible_ssh_extra_args="-R3128:localhost:3128"

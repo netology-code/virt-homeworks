@@ -1,0 +1,88 @@
+---
+
+- name: PostgreSQL | Make sure the dependencies are installed
+  yum:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items: "{{postgres_deps}}"
+
+- name: install pip
+  shell: curl "https://bootstrap.pypa.io/pip/2.7/get-pip.py" -o "get-pip.py" && python get-pip.py
+
+- name: 'update certifi'
+  shell: pip install --upgrade certifi
+
+- name: 'update setup-tools'
+  shell: pip install --upgrade setuptools
+
+- name: 'update pip'
+  shell: pip install --upgrade pip
+
+- name: install pip requirements
+  become: yes
+  pip:
+    state: forcereinstall
+    name: "{{ item }}"
+  loop:
+    - pgxnclient
+
+- name: configure postgresql repository key
+  apt_key: url={{ postgresql_apt_key_url }}
+  when: ansible_os_family == "Debian"
+
+- name: configure postgresql repository
+  apt_repository: repo={{ postgresql_apt_repo }}
+  become: yes
+  when: ansible_os_family == "Debian"
+
+- name: Add repository key
+  become: yes
+  rpm_key:
+    state: present
+    key: https://download.postgresql.org/pub/repos/yum/RPM-GPG-KEY-PGDG
+  when: ansible_os_family == "RedHat" and pgpro is not defined
+
+- name: configure postgresql repository
+  become: yes
+  yum:
+    name: "{{ postgresql_yum_repo_url }}"
+#    name: pgdg-redhat-repo.noarch
+#    name: https://download.postgresql.org/pub/repos/yum/reporpms/EL-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+    state: present
+  when: ansible_os_family == "RedHat" and pgpro is not defined
+
+- name: Add PostgresPRO repository
+  yum_repository:
+    file: "{{pgpro_repo_filename}}"
+    name: "{{pgpro_repo_name}}"
+    description: "{{pgpro_repo_description}}"
+    baseurl: "{{pgpro_repo_baseurl}}"
+    gpgcheck: 0
+  when: ansible_os_family == "RedHat" and pgpro is defined and pgpro | bool
+
+- name: install postgresql packages
+  become: yes
+  package: name={{ item.name }} state={{ item.state }} update_cache=true
+  with_items: "{{ postgresql_packages }}"
+
+#- name: install pg_repack
+#  environment:
+#    PATH: '{{pg_env_path}}'
+#  shell: pgxn install pg_repack
+
+# install fucking extensions
+- include_tasks: postgres_tasks_additional_extension_install.yml
+  with_dict: '{{postgres_database_additional_extensions}}'
+  when: postgres_database_additional_extensions is defined
+
+- name: Check Postgres is init
+  stat:
+    path: '{{pgdata_dir}}/base'
+  register: _pg_data_dir
+
+- name: initdb
+  shell: '{{ pg_init_db_cmd }}'
+  #shell: /usr/pgsql-{{postgres_version}}/bin/postgresql{{ postgres_version|replace('.','') }}-setup initdb
+  when: not _pg_data_dir.stat.exists
+

@@ -1,0 +1,37 @@
+---
+
+- include_tasks: postgres_tasks_createvolume.yml
+  when: postgres_create_datavolume is defined and postgres_create_datavolume | bool
+
+
+- name: Check if EPEL repo is already configured.
+  stat:
+    path: "{{ epel_repofile_path }}"
+  register: epel_repofile_result
+
+- name: Install EPEL repo.
+  yum:
+    name: "{{ epel_repo_url }}"
+    state: present
+  register: result
+  until: result is succeeded
+  retries: 5
+  delay: 10
+  when: not epel_repofile_result.stat.exists
+
+- name: include os-specific variables
+  include_vars: "{{ ansible_os_family }}.yml"
+
+- include_tasks: postgres_tasks_firewall.yml
+  when: postgres_set_firewall_rules | bool
+
+- include_tasks: postgres_tasks_encvolume.yml
+  when: postgres_encrypted_volume | bool
+
+- include_tasks: postgres_tasks_install.yml
+
+- include_tasks: postgres_tasks_configure.yml
+
+- include_tasks: postgres_tasks_createdb.yml
+  when: postgres_databases is defined
+

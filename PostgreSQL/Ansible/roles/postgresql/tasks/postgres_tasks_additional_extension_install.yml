@@ -1,0 +1,20 @@
+- name: Remove old stuff
+  file:
+    dest: '/tmp/{{item.key}}'
+    state: absent
+    force: yes
+
+- name: Clone extension repo
+  become: yes
+  become_user: postgres
+  git:
+    repo: '{{ item.value.git }}'
+    force: yes
+    dest: '/tmp/{{item.key}}'
+    accept_hostkey: yes
+    update: true
+
+- name: 'install {{item.key}}'
+  environment:
+    PATH: '{{pg_env_path}}'
+  shell: cd /tmp/{{item.key}} && {{item.value.install_cmd}}

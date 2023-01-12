@@ -1,0 +1,3 @@
+walg_storage_type: folder
+walg_full_backup_timer: '*-*-* 01:00:00'
+postgres_version: 12

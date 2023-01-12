@@ -1,0 +1,119 @@
+walg_storage_type: ssh
+net_mask:  "{{ ansible_default_ipv4.network }}/24"
+postgres_version: 12
+pg_reload_action: restart
+pgdata_dir: /var/lib/pgsql/{{postgres_version}}/data
+install_pg_eyes: false
+postgres_user: postgres
+service_name: 'postgresql-{{postgres_version}}.service'
+postgresql_max_connections: 100
+postgresql_reserverd_connections: 6
+postgresql_effective_io_concurrency: 100
+postgresql_autovacuum_vacuum_cost_delay: 20ms
+postgresql_autovacuum_vacuum_scale_factor: 0.01
+postgresql_autovacuum_analyze_scale_factor: 0.005
+postgresql_random_page_cost: 1.25
+postgresql_maintenance_work_mem: 2GB
+postgresql_work_mem: 32MB
+postgresql_min_wal_size: 64MB
+postgresql_max_wal_size: 1GB
+postgresql_archive_command: "'/usr/local/bin/wal-g --config /etc/walg.d/.walg.json wal-push %p >> {{pgdata_dir}}/log/archive_command.log 2>&1'"
+postgresql_restore_command: "'/usr/local/bin/wal-g --config /etc/walg.d/.walg.json wal-fetch %f %p >> {{pgdata_dir}}/log/restore_command.log 2>&1'"
+
+pg_env_path: /usr/pgsql-{{postgres_version}}/bin:{{ ansible_env.PATH }}
+pg_init_db_cmd: /usr/pgsql-{{postgres_version}}/bin/postgresql-{{ postgres_version|replace('.','') }}-setup initdb
+
+postgresql_pg_hba:
+  - { type: "host", database: "all", user: "postgres", address: "127.0.0.1/32", method: "trust" }
+  - { type: "local", database: "all", user: "all", address: , method: "peer" }
+  - { type: "host", database: "all", user: "all", address: "127.0.0.1/32", method: "md5" }
+  - { type: "host", database: "all", user: "all", address: "192.168.1.0/24", method: "md5" }
+  - { type: "host", database: "all", user: "all", address: "192.168.2.0/24", method: "md5" }
+  # Backups
+  - { type: "host", database: "all", user: "walg", address: "192.168.1.0/24", method: "md5" }
+  - { type: "host", database: "replication", user: "walg", address: "192.168.1.0/24", method: "md5" }
+  - { type: "host", database: "replication", user: "postgres", address: "192.168.1.0/24", method: "md5" }
+  - { type: "local", database: "replication", user: "postgres", address: , method: "trust" }
+  - { type: "host", database: "replication", user: "postgres", address: "192.168.1.0/24", method: "trust" }
+
+postgresql_parameters:
+  - { option: "max_connections", value: "{{postgresql_max_connections}}" }
+  - { option: "shared_buffers", value: "{{ansible_memtotal_mb % 100 * 25 }}MB" }
+  - { option: "effective_cache_size", value: "{{ansible_memtotal_mb % 100 * 75 }}MB" }
+  - { option: "maintenance_work_mem", value: "{{postgresql_maintenance_work_mem}}" }
+  - { option: "checkpoint_completion_target", value: "0.9" }
+  - { option: "wal_buffers", value: "-1" }
+  - { option: "default_statistics_target", value: "100" }
+  - { option: "random_page_cost", value: "{{postgresql_random_page_cost}}" }
+  - { option: "effective_io_concurrency", value: "{{postgresql_effective_io_concurrency}}" }
+  - { option: "work_mem", value: "{{postgresql_work_mem}}" }
+  - { option: "min_wal_size", value: "{{postgresql_min_wal_size}}" }
+  - { option: "max_wal_size", value: "{{postgresql_max_wal_size}}" }
+  - { option: "max_worker_processes", value: "{{ansible_processor_vcpus}}" }
+  - { option: "max_parallel_workers_per_gather", value: "{{ (ansible_processor_vcpus / 2 ) | int }}" }
+  - { option: "max_parallel_workers", value: "{{ansible_processor_vcpus}}" }
+  - { option: "max_parallel_maintenance_workers", value: "{{ (ansible_processor_vcpus / 2 ) | int }}" }
+  - { option: "parallel_leader_participation", value: "on" }
+  - { option: "enable_partitionwise_join", value: "on" }
+  - { option: "enable_partitionwise_aggregate", value: "on" }
+  - { option: "jit", value: "on" }
+  - { option: "listen_addresses", value: "'*'" }
+  - { option: "superuser_reserved_connections", value: "{{postgresql_reserverd_connections}}" }
+  - { option: "dynamic_shared_memory_type", value: "posix" }
+  - { option: "wal_level", value: "replica" }
+  - { option: "max_wal_senders", value: "10" }
+  - { option: "wal_keep_segments", value: "32" }
+  - { option: "max_replication_slots", value: "10" }
+  - { option: "hot_standby", value: "on" }
+  - { option: "log_destination", value: "'stderr'" }
+  - { option: "logging_collector", value: "on" }
+  - { option: "log_directory", value: "'log'" }
+  - { option: "log_filename", value: "'postgresql-%Y-%m-%d.log'" }
+  - { option: "log_truncate_on_rotation", value: "on" }
+  - { option: "log_rotation_age", value: "1d" }
+  - { option: "log_rotation_size", value: "0" }
+  - { option: "log_line_prefix", value: "'%m [%p] '" }
+  - { option: "log_timezone", value: "'Europe/Moscow'" }
+  - { option: "autovacuum", value: "on" }
+  - { option: "autovacuum_max_workers", value: "{{ (ansible_processor_vcpus / 2 ) | int }}" }
+  - { option: "autovacuum_vacuum_cost_limit", value: "-1" }
+  - { option: "autovacuum_vacuum_cost_delay", value: "{{postgresql_autovacuum_vacuum_cost_delay}}" }
+  - { option: "autovacuum_vacuum_scale_factor", value: "{{postgresql_autovacuum_vacuum_scale_factor}}" }
+  - { option: "autovacuum_analyze_scale_factor", value: "{{postgresql_autovacuum_analyze_scale_factor}}" }
+  - { option: "datestyle", value: "'iso, mdy'" }
+  - { option: "timezone", value: "'Europe/Moscow'" }
+  - { option: "lc_messages", value: "'en_US.UTF-8'" }
+  - { option: "lc_monetary", value: "'en_US.UTF-8'" }
+  - { option: "lc_numeric", value: "'en_US.UTF-8'" }
+  - { option: "lc_time", value: "'en_US.UTF-8'" }
+  - { option: "default_text_search_config", value: "'pg_catalog.english'" }
+  - { option: "shared_preload_libraries", value: "'pg_stat_statements'" }
+  - { option: "pg_stat_statements.max", value: "10000" }
+  - { option: "pg_stat_statements.track", value: "all" }
+  - { option: "track_io_timing", value: "on" }
+  - { option: "track_functions", value: "pl" }
+  - { option: "synchronous_commit", value: "on" }
+  - { option: "archive_mode", value: "on" }
+  - { option: "archive_command", value: "{{ postgresql_archive_command }}" }
+  - { option: "restore_command", value: "{{ postgresql_restore_command }}" }
+  - { option: "archive_timeout", value: "60" }
+  - { option: "checkpoint_timeout", value: "'15 min'" }
+  - { option: "bgwriter_delay", value: "200ms" }
+  - { option: "bgwriter_lru_maxpages", value: "100" }
+  - { option: "bgwriter_lru_multiplier", value: "2.0" }
+  - { option: "bgwriter_flush_after", value: "0" }
+
+postgres_databases_extensions:
+  - pgcrypto
+  - pg_trgm
+  - fuzzystrmatch
+  - unaccent
+  - ltree
+  - uuid-ossp
+
+postgres_databases:
+  sampledb:
+    user: sampledb_user
+    owner: sampledb_user
+    password: "{{ lookup('password', '{{playbook_dir}}/secrets/{{env}}/sampledb_user.postgres.pwd chars=ascii_letters,digits length=16') }}"
+    state: present

@@ -1,0 +1,10 @@
+[Unit]
+Description=Run PSQL Full Backup
+After=network.target
+[Service]
+Type=oneshot
+User={{postgres_user}}
+EnvironmentFile=/etc/walg.d/.pg.env
+ExecStart=/usr/local/bin/wal-g --config /etc/walg.d/.walg.json backup-push --full
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,7 @@
+[Unit]
+Description=Run walg-fullbackup.service every day
+After=network.target
+[Timer]
+OnCalendar={{walg_full_backup_timer}}
+[Install]
+WantedBy=multi-user.target

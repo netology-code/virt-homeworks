@@ -1,0 +1,48 @@
+---
+
+#- name: uninstall psycopg2
+#  pip:
+#    state: absent
+#    name: psycopg2
+#
+#- name: install pip requirements
+#  become: yes
+#  pip:
+#    state: forcereinstall
+#    name: "{{ item }}"
+#  loop:
+#    - psycopg2-binary
+
+- name: 'Copy pg_hba.conf'
+  template:
+    src: pg_hba.conf.j2
+    dest: '{{pgdata_dir}}/pg_hba.conf'
+    owner: '{{postgres_user}}'
+    group: '{{postgres_user}}'
+  become: yes
+  become_user: root
+  register: changes_to_pg_hba_config
+
+- name: 'Copy postgresql.conf'
+  template:
+    src: postgresql.conf.j2
+    dest: '{{pgdata_dir}}/postgresql.conf'
+    owner: '{{postgres_user}}'
+    group: '{{postgres_user}}'
+  become: yes
+  become_user: root
+  register: changes_to_postgresql_config
+
+- name: 'Restart PostgreSQL service'
+  systemd:
+    name: '{{service_name}}'
+    state: restarted
+    enabled: yes
+  when: pg_reload_action == "restart"
+
+- name: 'Reload PostgreSQL service'
+  shell: sudo -u postgres psql -c "SELECT pg_reload_conf();"
+  when: pg_reload_action == "reload"
+
+- name: Проверяем доступность сервиса
+  service: name={{service_name}} state=started enabled=yes

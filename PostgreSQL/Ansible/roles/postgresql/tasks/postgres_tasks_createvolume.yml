@@ -1,0 +1,53 @@
+- name: check mount point state
+  command: mountpoint -q '{{pvs_dev}}'
+  register: mount_state
+  failed_when: False
+  changed_when: False
+
+- name: set mount_state
+  set_fact: mount_state={{ mount_state.rc }}
+
+- name: clean pg data folder
+  file:
+    path: '{{pvs_mount_path}}/{{postgres_version}}/*'
+    state: absent
+  when: mount_state == "0"
+  ignore_errors: true
+
+- name: install lvm
+  become: yes
+  yum:
+    name:
+      - lvm*
+  when: ansible_os_family == "RedHat"
+
+- name: create volume group 'pg'
+  lvg: vg=pg pvs='{{pvs_dev}}'
+  register: create_vg
+  when: mount_state == "1"
+
+- name: create lv data on vg_pg
+  lvol: vg=pg lv=data size=+100%FREE
+  register: create_lv
+  when: mount_state == "1"
+
+- name: create a ext4 filesystem
+  filesystem: dev=/dev/mapper/pg-data
+    fstype=ext4 force=yes
+  when: mount_state == "0"
+
+- name: mount /dev/mapper/pg-data
+  mount:  src=/dev/mapper/pg-data path={{pvs_mount_path}}
+    fstype=ext4 state=mounted
+  when: mount_state == "0"
+
+- name: remove fstab mount
+  lineinfile: line="/dev/mapper/pg-data {{pvs_mount_path}} ext4 defaults 0 0"
+    path=/etc/fstab state=absent
+  when: mount_state == "0"
+
+- name: add fstab mount
+  lineinfile: line="/dev/mapper/pg-data {{pvs_mount_path}} ext4 defaults 0 2"
+      path=/etc/fstab state=present
+  when: mount_state == "0"
+

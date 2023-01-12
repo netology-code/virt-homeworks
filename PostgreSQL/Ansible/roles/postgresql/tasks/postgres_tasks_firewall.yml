@@ -1,0 +1,24 @@
+---
+
+- command: systemctl is-enabled firewalld
+  failed_when: false
+  changed_when: false
+  register: firewalld_is_enabled
+
+- name: set firewalld state
+  set_fact: patroni_firewalld="{{ true if (firewalld_is_enabled.stdout == 'enabled') else false }}"
+
+- block:
+
+  - name: make sure a firewalld is running
+    systemd: name=firewalld state=started
+  
+  - name: set firewalld rules
+    become: yes
+    firewalld:  rich_rule={{ item }}
+                immediate=true permanent=yes state=enabled
+    with_items:
+    - "rule family=ipv4 destination address={{ ansible_default_ipv4.address }} port port={{ patroni_consul_port }} protocol=tcp accept"
+    - "rule family=ipv4 destination address={{ ansible_default_ipv4.address }} port port={{ patroni_postgresql_port }} protocol=tcp accept"
+    
+  when: patroni_firewalld | bool

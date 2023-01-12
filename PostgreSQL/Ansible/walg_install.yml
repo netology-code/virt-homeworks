@@ -1,0 +1,7 @@
+- hosts: psql
+  roles:
+    - { role: psql_users }
+
+- hosts: psql,bkpstorage
+  roles:
+    - { role: wal-g }

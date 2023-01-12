@@ -1,0 +1,15 @@
+env: dev
+
+# wal-g
+app_archive_name: walg-pg-linux-amd64-master.tar.gz
+backup_root: /opt/psql_bkp
+walg_compression_method: brotli
+postgres_bkp_host: d00psqlbkp0001
+postgres_host: d00psql-walg0001
+postgres_port: 5432
+postgres_user: postgres
+postgres_home_dir: /var/lib/pgsql
+postgres_password: "{{ lookup('password', '{{playbook_dir}}/secrets/{{env}}/{{postgres_user}}.postgres chars=ascii_letters,digits length=16') }}"
+
+walg_db:
+  - sampledb

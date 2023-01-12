@@ -1,0 +1,38 @@
+- name: create db user
+  postgresql_user:
+    name: "{{ item.value.user }}"
+    password: "{{ item.value.password }}"
+    state: "{{ item.value.state | d ('present') }}"
+    login_host: 127.0.0.1
+  with_dict: "{{ postgres_databases }}"
+  become: yes
+  become_user: postgres
+  tags:
+    - createdb
+
+- name: create db
+  postgresql_db:
+    name: "{{ item.key }}"
+    owner: "{{ item.value.owner }}"
+    state: "{{ item.value.state | d ('present') }}"
+    login_host: 127.0.0.1
+  with_dict: "{{ postgres_databases }}"
+  become: yes
+  become_user: postgres
+  tags:
+    - createdb
+
+
+- name: install extensions
+  postgresql_ext:
+    name: "{{ item[0] }}"
+    db: "{{ item[1] }}"
+    login_host: 127.0.0.1
+  with_nested:
+  - "{{ postgres_databases_extensions }}"
+  - "{{ postgres_databases }}"
+  when: postgres_databases_extensions is defined
+  become: yes
+  become_user: postgres
+  tags:
+    -createdb

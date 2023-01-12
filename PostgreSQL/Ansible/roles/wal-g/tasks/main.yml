@@ -1,0 +1,66 @@
+---
+- name: "Create app user"
+  user: name={{postgres_user}} password={{postgres_password | password_hash('sha512')}} system=yes shell=/bin/bash home={{postgres_home_dir}} force=yes
+  when: walg_storage_type | lower == "folder"
+
+- name: install wal-g
+  unarchive:
+    src: 'files/wal-g/{{app_archive_name}}'
+    dest: /usr/local/bin
+
+- name: Mkdir directory for backups
+  file:
+    path: '{{ backup_root }}'
+    owner: '{{postgres_user}}'
+    group: '{{postgres_user}}'
+    state: directory
+    mode: '0750'
+  when: walg_storage_type | lower == "folder"
+
+- name: Mkdir directory for wal-g config and env
+  file:
+    path: '/etc/walg.d'
+    owner: '{{postgres_user}}'
+    group: '{{postgres_user}}'
+    state: directory
+    mode: '0755'
+
+- name: Copy wal-g config
+  template:
+    dest: "/etc/walg.d/.walg.json"
+    src: ".walg.{{ walg_storage_type }}.json.j2"
+    owner: '{{postgres_user}}'
+    group: '{{postgres_user}}'
+
+- name: Copy env variables
+  template:
+    dest: "/etc/walg.d/.pg.env"
+    src: ".pg.env.j2"
+    owner: '{{postgres_user}}'
+    group: '{{postgres_user}}'
+  when: walg_storage_type | lower == "folder"
+
+- block:
+    - name: Copy systemd units
+      become: yes
+      template:
+        src: '{{item}}.j2'
+        dest: '/etc/systemd/system/{{item}}'
+        mode: "0644"
+      with_items:
+        - "walg-fullbackup.service"
+        - "walg-fullbackup.timer"
+      register: units
+
+    - name: restarted services
+      systemd:
+        name: '{{item}}'
+        state: restarted
+        enabled: yes
+        daemon_reload: yes
+      with_items:
+        - "walg-fullbackup.timer"
+
+  become: yes
+  become_user: root
+  when: walg_storage_type | lower == "folder"

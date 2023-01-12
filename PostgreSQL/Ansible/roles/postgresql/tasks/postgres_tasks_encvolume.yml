@@ -1,0 +1,74 @@
+---
+
+- name: install lvm and cryptsetup-luks
+  become: yes
+  yum:
+    name:
+    - lvm*
+    - cryptsetup-luks
+  when: ansible_os_family == "RedHat"
+
+- name: create volume group 'luks'
+  lvg: vg=luks pvs=/dev/sdb
+  register: create_vg
+    
+- name: create lv data on vg_luks
+  lvol: vg=luks lv=crypt size=+100%FREE
+  register: create_lv
+  #  when: create_vg.changed
+
+- name: create keyfile
+  copy: dest=/opt/passphrase content={{ lookup ('password', '{{playbook_dir}}/secrets/{{env}}/{{ansible_fqdn}}_luks_passphrase chars=ascii_letters,digits length=16') }}
+  register: passphrase
+  
+- name: create LUKS container
+  become: yes
+  when: create_lv.changed
+  register: create_luks_container
+  luks_device:  device=/dev/mapper/luks-crypt keyfile=/opt/passphrase
+                state=present
+    
+- set_fact: passphrase="{{ lookup ('file', '{{playbook_dir}}/secrets/{{env}}/{{ansible_fqdn}}_luks_passphrase chars=ascii_letters,digits length=16') }}"
+
+- name: check mount point state /var/lib/pgsql
+  command: mountpoint -q /var/lib/pgsql
+  register: mount_state
+  failed_when: False
+  changed_when: False
+  
+- name: set mount_state
+  set_fact: mount_state={{ mount_state.rc }}
+
+- block:
+  
+  - name: open /dev/mapper/luks-crypt to /dev/mapper/luks-data
+    shell: echo {{ passphrase }} | cryptsetup luksOpen /dev/mapper/luks-crypt luks-data
+  
+  - block:
+    - name: create a ext4 filesystem on /dev/mapper/luks
+      when: create_luks_container.changed
+      filesystem: dev=/dev/mapper/luks-data
+                  fstype=ext4 force=yes
+    - name: mount /dev/mapper/luks-data to /var/lib/postgres
+      mount:  src=/dev/mapper/luks-data path=/var/lib/postgres
+              fstype=auto state=mounted
+    when: ansible_os_family == "Debian"
+  
+  - block:
+    - name: create a xfs filesystem on /dev/mapper/luks
+      when: create_luks_container.changed
+      filesystem: dev=/dev/mapper/luks-data
+                  fstype=xfs force=yes
+    - name: mount /dev/mapper/luks-data to /var/lib/pgsql
+      mount:  src=/dev/mapper/luks-data path=/var/lib/pgsql
+              fstype=auto state=mounted
+    when: ansible_os_family == "RedHat"
+
+  - name: remove fstab mount
+    lineinfile: line="/dev/mapper/luks-data /var/lib/{{ item }} auto defaults 0 0"
+                path=/etc/fstab state=absent
+    loop:
+    - pgsql
+    - postgres
+    
+  when: mount_state == "1"

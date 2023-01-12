@@ -1,0 +1,27 @@
+- name: Check recovery status on nodes
+  postgresql_query:
+    query: select pg_is_in_recovery();
+  become: yes
+  become_user: postgres
+  register: _is_master
+
+- name: create db user
+  postgresql_user:
+    name: "{{ postgres_user }}"
+    password: "{{ postgres_password }}"
+    state: present
+  become: yes
+  become_user: postgres
+  when: _is_master.query_result[0].pg_is_in_recovery == False
+
+- name: Ensure we have access from the new user
+  postgresql_privs:
+    db: "{{ item }}"
+    role: "{{ postgres_user }}"
+    objs: ALL_IN_SCHEMA
+    privs: SELECT
+  with_items:
+    - "{{ walg_db }}"
+  become: yes
+  become_user: postgres
+  when: _is_master.query_result[0].pg_is_in_recovery == False

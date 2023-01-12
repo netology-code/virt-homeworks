@@ -1,0 +1,6 @@
+#jinja2: lstrip_blocks: True
+{% if postgresql_pg_hba |d([], true) |length > 0 %}
+  {% for client in postgresql_pg_hba %}
+{{ client.type }} {{ client.database }} {{ client.user }} {{ client.address|d(None) }} {{ client.method }}
+  {% endfor %}
+{% endif %}

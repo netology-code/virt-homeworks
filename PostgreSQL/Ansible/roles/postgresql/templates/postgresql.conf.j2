@@ -1,0 +1,6 @@
+#jinja2: lstrip_blocks: True
+{% if postgresql_parameters |length > 0 %}
+  {% for param in postgresql_parameters %}
+{{ param.option }} = {{ param.value }}
+  {% endfor %}
+{% endif %}

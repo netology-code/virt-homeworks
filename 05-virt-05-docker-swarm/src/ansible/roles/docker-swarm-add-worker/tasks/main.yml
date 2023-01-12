@@ -1,4 +1,0 @@
----
-  - name: Add Workers to the Swarm
-    shell: "docker swarm join --token {{ hostvars['node01.netology.yc']['worker_token']['stdout'] }} {{ hostvars['node01.netology.yc']['ansible_default_ipv4']['address'] }}:2377"
-    tags: swarm
