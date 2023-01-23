@@ -8,7 +8,7 @@
 
 Любые вопросы по решению задач задавайте в чате учебной группы.
 
-## Виртуализация
+## Модуль "Виртуализация и контейнеризация"
 
 1. [Введение в виртуализацию.](https://github.com/netology-code/virt-homeworks/tree/virt-11/05-virt-01-basics)
 
@@ -20,22 +20,22 @@
 
 5. [ Оркестрация кластером Docker контейнеров на примере Docker Swarm.](https://github.com/netology-code/virt-homeworks/tree/virt-11/05-virt-05-docker-swarm)
 
-## Администрирование баз данных
+## Модуль "Администрирование баз данных для DevOps-инженеров"
 
-6. [Типы и структура СУБД](06-db-01-basics)
+1. [Типы и структура СУБД](06-db-01-basics)
 
-7. [SQL](06-db-02-sql)
+2. [SQL](06-db-02-sql)
 
-8. [MySQL](06-db-03-mysql)
+3. [MySQL](06-db-03-mysql)
 
-9. [PostgreSQL](06-db-04-postgresql)
+4. [PostgreSQL](06-db-04-postgresql)
 
-10. [Elasticsearch](06-db-05-elasticsearch)
+5. [Elasticsearch](06-db-05-elasticsearch)
 
-11. [Troubleshooting](06-db-06-troobleshooting)
+6. [Troubleshooting](06-db-06-troobleshooting)
 
 
-## Облачная инфраструктура. Terraform
+## Модуль "Облачная инфраструктура. Terraform"
 
 12. [Конфигурация как код](07-terraform-01-intro) 
 
