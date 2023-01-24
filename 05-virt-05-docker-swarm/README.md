@@ -15,11 +15,11 @@
 
 ## Важно!
 
-Перед отправкой работы на проверку удаляйте неиспользуемые ресурсы.
+1. Перед отправкой работы на проверку удаляйте неиспользуемые ресурсы.
 Это важно для того, чтоб предупредить неконтролируемый расход средств, полученных в результате использования промокода.
-Подробные рекомендации [здесь](https://github.com/netology-code/virt-homeworks/blob/virt-11/r/README.md)
+Подробные рекомендации [здесь](https://github.com/netology-code/virt-homeworks/blob/virt-11/r/README.md).
 
-[Ссылки для установки открытого ПО](https://github.com/netology-code/devops-materials/blob/master/README.md)
+2. [Ссылки для установки открытого ПО](https://github.com/netology-code/devops-materials/blob/master/README.md)
 
 ---
 
