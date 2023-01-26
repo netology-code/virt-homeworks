@@ -45,7 +45,7 @@
 ## Задача 4
 Откройте web браузер, зайдите на страницу http://<внешний_ip_адрес_вашей_ВМ>:3000.
 Используйте для авторизации логин и пароль из ([.env-file](https://github.com/netology-group/virt-homeworks/blob/virt-11/05-virt-04-docker-compose/src/ansible/stack/.env)).
-Изучите доступный интерфейс, найдите в интерфейсе автоматически созданные docker-compose панели с графиками(([dashboards]([https://github.com/netology-group/virt-homeworks/blob/virt-11/05-virt-04-docker-compose/src/ansible/stack/docker-compose.yaml](https://grafana.com/docs/grafana/latest/dashboards/use-dashboards/)))).
+Изучите доступный интерфейс, найдите в интерфейсе автоматически созданные docker-compose панели с графиками(([dashboards](https://grafana.com/docs/grafana/latest/dashboards/use-dashboards/))).
 
 Для получения зачета, вам необходимо предоставить: 
 - Скриншот работающего веб-интерфейса Grafana с текущими метриками, как на примере ниже
