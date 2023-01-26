@@ -40,14 +40,14 @@
 С помощью ansible+docker-compose разверните на виртуальной машине из предыдущего задания систему мониторинга на основе Prometheus/Grafana .
 Используйте ansible код в директории ([src/ansible](https://github.com/netology-group/virt-homeworks/tree/virt-11/05-virt-04-docker-compose/src/ansible))
 
-Для получения зачета вам необходимо предоставить вывод команды "docker ps" , все контейнеры, описанные в ([docker-compose.yml](https://github.com/netology-group/virt-homeworks/blob/virt-11/05-virt-04-docker-compose/src/ansible/stack/docker-compose.yaml)),  должны быть в статусе "Up".
+Для получения зачета вам необходимо предоставить вывод команды "docker ps" , все контейнеры, описанные в ,  должны быть в статусе "Up".
 
 ## Задача 4
 Откройте web браузер, зайдите на страницу http://<внешний_ip_адрес_вашей_ВМ>:3000.
-Используйте для авторизации ([.env-filel](https://github.com/netology-group/virt-homeworks/blob/virt-11/05-virt-04-docker-compose/src/ansible/stack/.env)).
-Изучите доступный интерфейс, найдите в интерфейсе автоматически созданные docker-compose панели с графиками(dashboards).
+Используйте для авторизации логин и пароль из ([.env-file](https://github.com/netology-group/virt-homeworks/blob/virt-11/05-virt-04-docker-compose/src/ansible/stack/.env)).
+Изучите доступный интерфейс, найдите в интерфейсе автоматически созданные docker-compose панели с графиками(([dashboards]([https://github.com/netology-group/virt-homeworks/blob/virt-11/05-virt-04-docker-compose/src/ansible/stack/docker-compose.yaml](https://grafana.com/docs/grafana/latest/dashboards/use-dashboards/)))).
 
-Для получения зачета, вам необходимо предоставить:
+Для получения зачета, вам необходимо предоставить: 
 - Скриншот работающего веб-интерфейса Grafana с текущими метриками, как на примере ниже
 <p align="center">
   <img width="1200" height="600" src="./assets/yc_02.png">
