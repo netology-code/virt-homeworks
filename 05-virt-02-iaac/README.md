@@ -37,13 +37,13 @@
 
 Установить на личный компьютер:
 
-- VirtualBox
-- Vagrant
+- [VirtualBox](https://www.virtualbox.org/)
+- [Vagrant](https://github.com/netology-code/devops-materials)
 - Ansible
 
 *Приложить вывод команд установленных версий каждой из программ, оформленный в markdown.*
 
-## Задача 4 (*)
+## Задача 4 
 
 Воспроизвести практическую часть лекции самостоятельно.
 
