@@ -39,6 +39,7 @@
 
 - [VirtualBox](https://www.virtualbox.org/)
 - [Vagrant](https://github.com/netology-code/devops-materials)
+- [Terraform](https://github.com/netology-code/devops-materials/blob/master/README.md)
 - Ansible
 
 *Приложить вывод команд установленных версий каждой из программ, оформленный в markdown.*
