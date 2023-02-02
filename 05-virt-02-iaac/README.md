@@ -54,6 +54,11 @@
 docker ps
 ```
 
-Примечание! Если у вас недоступен репозиторий образов(ошибка 404): 
+Примечание! Если Vagrant выдает вам ошибку:
+
+``URL: ["https://vagrantcloud.com/bento/ubuntu-20.04"]   
+Error: The requested URL returned error: 404:``
+
+Выполните следующие действия:
 1. Скачайте с [сайта](https://app.vagrantup.com/bento/boxes/ubuntu-20.04) файл-образ "bento/ubuntu-20.04"
 2. Добавьте его в список образов Vagrant: "vagrant box add bento/ubuntu-20.04 <путь к файлу>"
