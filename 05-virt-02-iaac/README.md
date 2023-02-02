@@ -56,7 +56,7 @@ docker ps
 
 Примечание! Если Vagrant выдает вам ошибку:
 
-``URL: ["https://vagrantcloud.com/bento/ubuntu-20.04"]   
+``URL: ["https://vagrantcloud.com/bento/ubuntu-20.04"]       
 Error: The requested URL returned error: 404:``
 
 Выполните следующие действия:
