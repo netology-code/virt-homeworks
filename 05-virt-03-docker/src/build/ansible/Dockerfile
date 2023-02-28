@@ -25,7 +25,7 @@ RUN CARGO_NET_GIT_FETCH_WITH_CLI=1 && \
     pip uninstall ansible-base && \
     pip install ansible-core && \
     pip install ansible==2.10.0 && \
-    pip install mitogen ansible-lint jmespath && \
+    pip install --ignore-installed mitogen ansible-lint jmespath && \
     pip install --upgrade pywinrm && \
     apk del build-dependencies && \
     rm -rf /var/cache/apk/* && \
