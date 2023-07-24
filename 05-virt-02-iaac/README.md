@@ -37,9 +37,9 @@
 
 Установите на личный компьютер:
 
-- [VirtualBox](https://www.virtualbox.org/),
-- [Vagrant](https://github.com/netology-code/devops-materials),
-- [Terraform](https://github.com/netology-code/devops-materials/blob/master/README.md),
+- [VirtualBox][сылка для установки](https://www.virtualbox.org/),
+- [Vagrant][ссылка для установки](https://github.com/netology-code/devops-materials),
+- [Terraform][ссылка для установки](https://github.com/netology-code/devops-materials/blob/master/README.md),
 - Ansible.
 
 *Приложите вывод команд установленных версий каждой из программ, оформленный в Markdown.*
